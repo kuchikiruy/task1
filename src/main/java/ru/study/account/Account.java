@@ -1,11 +1,8 @@
 package ru.study.account;
 
-import lombok.ToString;
-
 import java.util.HashMap;
 import java.util.Map;
 
-@ToString
 public class Account {
     private String name;
     private final Map<String, Double> money = new HashMap<>();
