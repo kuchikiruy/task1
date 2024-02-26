@@ -21,6 +21,7 @@ public class TestTask1 {
 
     }
     @Test
+    @DisplayName("Операции с деняжками")
     public void testMoney() {
         acc.updateMoney("RUR", 50);
         acc.updateMoney("EUR", 50);
@@ -33,5 +34,25 @@ public class TestTask1 {
         } catch (IllegalArgumentException e) {
             System.out.println("нормsss");
         }
+    }
+
+    @Test
+    @DisplayName("Галя, отмена")
+    public void testUndo() {
+        try {
+            acc.undo();
+            acc.undo();
+            acc.undo();
+            acc.undo();
+        } catch (IllegalStateException e) {System.out.println("норм");}
+
+    }
+
+    @Test
+    @DisplayName("Спаси и сохрани")
+
+    public void testSave(){
+        acc.save();
+        acc.load();
     }
 }
