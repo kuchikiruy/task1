@@ -9,6 +9,7 @@ public class Account extends Command{
     private String name;
     private final Map<String, Double> money = new HashMap<>();
     private final Stack<Account> undoStack = new Stack<>();
+    private final Stack<Account> accBkb = new Stack<>();
 
     public Account(String name) {
         setName(name);
@@ -43,7 +44,7 @@ public class Account extends Command{
 
     @Override
     public void undo() {
-        if (!undoStack.isEmpty()) {throw new IllegalStateException("Не возможно отменить");}
+        if (undoStack.isEmpty()) {throw new IllegalStateException("Не возможно отменить");}
         this.name = undoStack.lastElement().name;
         this.money.putAll(undoStack.lastElement().money);
         undoStack.removeElementAt(undoStack.size()-1);
@@ -56,12 +57,13 @@ public class Account extends Command{
 
     @Override
     public void save() {
-
+            accBkb.push(this);
     }
 
     @Override
     public Object load() {
-        return null;
+        if (accBkb.isEmpty()) {throw new IllegalStateException("Нет сохранений");}
+        return accBkb.lastElement();
     }
 }
 
